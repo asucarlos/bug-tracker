@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 //import { useDispatch } from 'react-redux';
 //import { getBugs } from '../../store/bug-slice';
 import BugItem from '../BugItem/BugItem';
+import ModalOverlay from '../../../UI/ModalOverlay';
 //import { getBugData } from '../../../store/bug-slice';
 
 // const DUMMY_DATA = [
@@ -82,35 +83,37 @@ const BugsList = () => {
   //console.log(sortedData);
 
   return (
-    <div className={classes.container}>
-      {/* <p>VIEWBUGS</p> */}
-      <h1>All Bugs</h1>
-      <ul className={classes['list-container']}>
-        <li className={classes.labels}>
-          <p>Title</p>
-          <p>Version</p>
-          <p>Priority</p>
-          <p>Assigned</p>
-          <p>Creator</p>
-          <div className={classes.actions}>
-            <p>Edit</p>
-            <p>Delete</p>
-          </div>
-        </li>
-        {sortedArray.length >= 1 &&
-          sortedArray.map((bug) => (
-            <BugItem
-              className={classes.items}
-              bug={bug}
-              key={bug.id}
-              id={bug.id}
-            />
-          ))}
-        {sortedArray.length === 0 && (
-          <p className={classes.error}>No bugs found.</p>
-        )}
-      </ul>
-    </div>
+    <React.Fragment>
+      <div className={classes.container}>
+        {/* <p>VIEWBUGS</p> */}
+        <h1>All Bugs</h1>
+        <ul className={classes['list-container']}>
+          <li className={classes.labels}>
+            <p>Title</p>
+            <p>Version</p>
+            <p>Priority</p>
+            <p>Assigned</p>
+            <p>Creator</p>
+            <div className={classes.actions}>
+              <p>Edit</p>
+              <p>Delete</p>
+            </div>
+          </li>
+          {sortedArray.length >= 1 &&
+            sortedArray.map((bug) => (
+              <BugItem
+                className={classes.items}
+                bug={bug}
+                key={bug.id}
+                id={bug.id}
+              />
+            ))}
+          {sortedArray.length === 0 && (
+            <p className={classes.error}>No bugs found.</p>
+          )}
+        </ul>
+      </div>
+    </React.Fragment>
   );
 };
 
