@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
+import { storeDataToServer } from '../../../store/bug-slice';
 import { addNewBugs } from '../../../store/bug-slice';
 import useBugInput from '../../../hooks/useBugInput';
 import Button from '../../../UI/Button';
@@ -72,6 +73,26 @@ const AddNewBug = () => {
     };
 
     dispatch(addNewBugs(newBug));
+    dispatch(storeDataToServer(newBug));
+
+    //add data to Firebase (this worked)
+    // const storeData = async (newBug) => {
+    //   const response = await fetch(
+    //     'https://bug-tracker-aaa46-default-rtdb.europe-west1.firebasedatabase.app/bugs.json',
+    //     {
+    //       method: 'POST',
+    //       body: JSON.stringify(newBug),
+    //       //headers: { 'Content-Type': 'application/json' },
+    //     }
+    //   );
+
+    //   if (!response.ok) {
+    //     throw new Error('cannot store new bug');
+    //   }
+    // };
+
+    // storeData(newBug).catch((error) => console.error(error.message));
+
     history.push('/bug-tracker/bugs-list');
 
     resetTitle();

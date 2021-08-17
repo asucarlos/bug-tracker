@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router';
 
+import { storeDataToServer } from '../../../store/bug-slice';
 import { updateBugs } from '../../../store/bug-slice';
 import useBugInput from '../../../hooks/useBugInput';
 import Button from '../../../UI/Button';
@@ -76,6 +77,9 @@ const EditBug = () => {
     };
 
     dispatch(updateBugs(newBug));
+
+    //store data to Firebase (this didnt work)
+    dispatch(storeDataToServer(newBug));
     history.push('/bug-tracker/bugs-list');
 
     resetTitle();

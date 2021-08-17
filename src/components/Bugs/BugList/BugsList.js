@@ -1,13 +1,24 @@
 import classes from './BugsList.module.css';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 import BugItem from '../BugItem/BugItem';
 import ModalOverlay from '../../../UI/ModalOverlay';
+//import { getBugs } from '../../../store/bug-slice';
+import { getDataFromServer } from '../../../store/bug-slice';
 
 const BugsList = () => {
+  const dispatch = useDispatch();
   const { bugs } = useSelector((state) => state.bugs);
   const { modalOpen } = useSelector((state) => state.ui);
+
+  //const bugsList = dispatch(getDataFromServer());
+  //console.log(bugsList);
+  useEffect(() => {
+    dispatch(getDataFromServer());
+  }, [dispatch]);
 
   //eventually move to bug-slice
   let sortedArray = [...bugs];
