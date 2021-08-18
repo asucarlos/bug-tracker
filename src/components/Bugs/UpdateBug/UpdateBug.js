@@ -1,9 +1,11 @@
 import classes from './UpdateBug.module.css';
 import React from 'react';
+//import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router';
 
-import { storeDataToServer } from '../../../store/bug-slice';
+//import { storeDataToServer } from '../../../store/bug-slice';
+//import { storeUpdatedDataToServer } from '../../../store/bug-slice';
 import { updateBugs } from '../../../store/bug-slice';
 import useBugInput from '../../../hooks/useBugInput';
 import Button from '../../../UI/Button';
@@ -58,6 +60,11 @@ const EditBug = () => {
     resetValueHandler: resetCreator,
   } = useBugInput(selectedBug.creator);
 
+  //this didn't work
+  // useEffect(() => {
+  //   dispatch(storeDataToServer(bugs, 'PUT'));
+  // }, [dispatch, bugs]);
+
   const submitUpdatedBugHandler = (e) => {
     e.preventDefault();
 
@@ -77,9 +84,12 @@ const EditBug = () => {
     };
 
     dispatch(updateBugs(newBug));
+    //dispatch(storeUpdatedDataToServer(bugs));
+    console.log(bugs);
 
-    //store data to Firebase (this didnt work)
-    dispatch(storeDataToServer(newBug));
+    //this didn't work
+    //dispatch(storeDataToServer(newBug));
+
     history.push('/bug-tracker/bugs-list');
 
     resetTitle();

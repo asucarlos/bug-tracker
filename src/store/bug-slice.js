@@ -32,10 +32,12 @@ const bugSlice = createSlice({
           creator: newBug.creator,
           time: newBug.time,
         });
+        console.log(state.bugs);
       }
     },
 
     updateBugs(state, action) {
+      //const dispatch = useDispatch();
       state.isUpdatingBug = true;
       state.selectedBug = action.payload;
       const existingItem = state.bugs.find(
@@ -57,6 +59,7 @@ const bugSlice = createSlice({
 
       if (existingItem) {
         state.bugs.splice(existingItemIndex, 1, bugUpdate);
+        console.log(state.bugs);
       }
 
       state.isUpdatingBug = false;
@@ -85,6 +88,7 @@ const bugSlice = createSlice({
 export const getDataFromServer = () => {
   return (dispatch) => {
     const getData = async () => {
+      console.log('running getDataFromServer');
       //const dispatch = useDispatch();
       const response = await fetch(`${bugsDataURL}`);
 
@@ -123,8 +127,32 @@ export const getDataFromServer = () => {
 export const storeDataToServer = (newBug) => {
   return () => {
     const storeData = async (newBug) => {
+      console.log('running storeDataToServer');
       const response = await fetch(`${bugsDataURL}`, {
         method: 'POST',
+        body: JSON.stringify(newBug),
+        //headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (!response.ok) {
+        throw new Error('cannot store new bug');
+      }
+    };
+
+    try {
+      storeData(newBug);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+};
+
+export const storeUpdatedDataToServer = (newBug) => {
+  return () => {
+    const storeData = async (newBug) => {
+      console.log('running storeUpdatedDataToServer');
+      const response = await fetch(`${bugsDataURL}`, {
+        method: 'PUT',
         body: JSON.stringify(newBug),
         //headers: { 'Content-Type': 'application/json' },
       });
