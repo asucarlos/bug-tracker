@@ -12,6 +12,7 @@ import { getDataFromServer } from '../../../store/bug-slice';
 const BugsList = () => {
   const dispatch = useDispatch();
   const { bugs } = useSelector((state) => state.bugs);
+  console.log(bugs);
   const { modalOpen } = useSelector((state) => state.ui);
 
   //const bugsList = dispatch(getDataFromServer());

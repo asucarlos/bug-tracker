@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router';
 
 //import { storeDataToServer } from '../../../store/bug-slice';
-//import { storeUpdatedDataToServer } from '../../../store/bug-slice';
+import { storeUpdatedDataToServer } from '../../../store/bug-slice';
 import { updateBugs } from '../../../store/bug-slice';
 import useBugInput from '../../../hooks/useBugInput';
 import Button from '../../../UI/Button';
@@ -83,8 +83,12 @@ const EditBug = () => {
       id: enteredId,
     };
 
+    //BugsList updated (so it's working...?)
     dispatch(updateBugs(newBug));
-    //dispatch(storeUpdatedDataToServer(bugs));
+
+    //want to replace the whole bugs data, but doesn't work
+    //bugs state is not updated...?
+    dispatch(storeUpdatedDataToServer(bugs));
     console.log(bugs);
 
     //this didn't work

@@ -98,7 +98,9 @@ export const getDataFromServer = () => {
 
       const data = await response.json();
       console.log(data);
+
       const bugsList = [];
+      //Firebase has a key for each item
       for (const key in data) {
         bugsList.push({
           id: data[key].id,
@@ -147,13 +149,14 @@ export const storeDataToServer = (newBug) => {
   };
 };
 
-export const storeUpdatedDataToServer = (newBug) => {
+export const storeUpdatedDataToServer = (updatedBugsList) => {
   return () => {
-    const storeData = async (newBug) => {
+    const storeData = async (updatedBugsList) => {
+      //want to replace the whole bugs data, but doesn't work
       console.log('running storeUpdatedDataToServer');
       const response = await fetch(`${bugsDataURL}`, {
         method: 'PUT',
-        body: JSON.stringify(newBug),
+        body: JSON.stringify(updatedBugsList),
         //headers: { 'Content-Type': 'application/json' },
       });
 
@@ -163,7 +166,7 @@ export const storeUpdatedDataToServer = (newBug) => {
     };
 
     try {
-      storeData(newBug);
+      storeData(updatedBugsList);
     } catch (error) {
       console.error(error.message);
     }
