@@ -19,7 +19,7 @@ const BugsList = () => {
   //console.log(bugsList);
   useEffect(() => {
     dispatch(getDataFromServer());
-  }, [dispatch]);
+  }, []);
 
   //eventually move to bug-slice
   let sortedArray = [...bugs];

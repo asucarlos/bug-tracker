@@ -1,8 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
+//import { useState } from 'react';
 import { bugsDataURL } from '../ignoreInfo';
 //import { useDispatch } from 'react-redux';
 
-const initialBugsState = { bugs: [], isUpdatingBug: false, selectedBug: null };
+const initialBugsState = {
+  bugs: [],
+  isUpdatingBug: false,
+  selectedBug: null,
+  // storageComplete: false
+};
 
 const bugSlice = createSlice({
   name: 'bug',
@@ -15,6 +21,7 @@ const bugSlice = createSlice({
     },
 
     addNewBugs(state, action) {
+      //const dispatch = useDispatch();
       state.isUpdatingBug = false;
       const newBug = action.payload;
 
@@ -33,6 +40,7 @@ const bugSlice = createSlice({
           time: newBug.time,
         });
         console.log(state.bugs);
+        //storeDataToServer(newBug);
       }
     },
 
@@ -86,6 +94,7 @@ const bugSlice = createSlice({
 });
 
 export const getDataFromServer = () => {
+  //const [isGetting, setIsGetting] = useState(false);
   return (dispatch) => {
     const getData = async () => {
       console.log('running getDataFromServer');
@@ -152,11 +161,15 @@ export const storeDataToServer = (newBug) => {
 export const storeUpdatedDataToServer = (updatedBugsList) => {
   return () => {
     const storeData = async (updatedBugsList) => {
+      //const bugsObject = for()
       //want to replace the whole bugs data, but doesn't work
       console.log('running storeUpdatedDataToServer');
+      console.log(updatedBugsList);
       const response = await fetch(`${bugsDataURL}`, {
         method: 'PUT',
+        //format for updatedBugsList is not right...?
         body: JSON.stringify(updatedBugsList),
+        //body: JSON.stringify({ key: {} }),
         headers: { 'Content-Type': 'application/json' },
       });
 
