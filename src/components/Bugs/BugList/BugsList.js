@@ -27,6 +27,8 @@ const BugsList = () => {
     sortedArray.sort((a, b) => Number(a.priority) - Number(b.priority));
   }
 
+  //PROBLEM: old data shown on the list
+
   return (
     <React.Fragment>
       <div className={classes.container}>

@@ -133,7 +133,7 @@ export const storeDataToServer = (newBug) => {
       const response = await fetch(`${bugsDataURL}`, {
         method: 'POST',
         body: JSON.stringify(newBug),
-        //headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
       });
 
       if (!response.ok) {
@@ -157,7 +157,7 @@ export const storeUpdatedDataToServer = (updatedBugsList) => {
       const response = await fetch(`${bugsDataURL}`, {
         method: 'PUT',
         body: JSON.stringify(updatedBugsList),
-        //headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
       });
 
       if (!response.ok) {
