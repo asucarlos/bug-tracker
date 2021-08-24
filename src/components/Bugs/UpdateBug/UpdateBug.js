@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router';
 
 //import { storeDataToServer } from '../../../store/bug-slice';
-import { storeUpdatedDataToServer } from '../../../store/bug-slice';
+import { storeUpdatedDataToServer } from '../../../store/bug-action';
 import { updateBugs } from '../../../store/bug-slice';
 import useBugInput from '../../../hooks/useBugInput';
 import Button from '../../../UI/Button';

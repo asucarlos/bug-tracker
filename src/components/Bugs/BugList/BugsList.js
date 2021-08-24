@@ -2,12 +2,12 @@ import classes from './BugsList.module.css';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+//import { useEffect } from 'react';
 
 import BugItem from '../BugItem/BugItem';
 import ModalOverlay from '../../../UI/ModalOverlay';
 //import { getBugs } from '../../../store/bug-slice';
-import { getDataFromServer } from '../../../store/bug-slice';
+//import { getDataFromServer } from '../../../store/bug-slice';
 
 const BugsList = () => {
   const dispatch = useDispatch();
@@ -17,9 +17,9 @@ const BugsList = () => {
 
   //const bugsList = dispatch(getDataFromServer());
   //console.log(bugsList);
-  useEffect(() => {
-    dispatch(getDataFromServer());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getDataFromServer());
+  // }, []);
 
   //eventually move to bug-slice
   let sortedArray = [...bugs];

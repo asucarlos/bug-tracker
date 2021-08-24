@@ -3,7 +3,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
-import { storeDataToServer } from '../../../store/bug-slice';
+import { storeDataToServer } from '../../../store/bug-action';
 import { addNewBugs } from '../../../store/bug-slice';
 import useBugInput from '../../../hooks/useBugInput';
 import Button from '../../../UI/Button';
@@ -54,13 +54,9 @@ const AddNewBug = () => {
     resetValueHandler: resetCreator,
   } = useBugInput('');
 
-  const submitNewBugHandler = (e) => {
-    e.preventDefault();
-
-    const enteredTime = new Date().getTime();
-    const enteredId = enteredTime + enteredTitle;
-
+  const submitData = () => {
     const newBug = {
+      //id: enteredId,
       title: enteredTitle,
       details: enteredDetails,
       steps: enteredSteps,
@@ -68,12 +64,43 @@ const AddNewBug = () => {
       priority: enteredPriority,
       assigned: enteredAssigned,
       creator: enteredCreator,
-      time: enteredTime,
-      id: enteredId,
+      //time: enteredTime,
     };
 
-    dispatch(addNewBugs(newBug));
-    dispatch(storeDataToServer(newBug));
+    storeDataToServer(newBug);
+
+    history.push('/bug-tracker/bugs-list');
+
+    resetTitle();
+    resetDetails();
+    resetSteps();
+    resetVersion();
+    resetPriority();
+    resetAssigned();
+    resetCreator();
+  };
+
+  const submitNewBugHandler = (e) => {
+    e.preventDefault();
+    submitData();
+
+    //const enteredTime = new Date().getTime();
+    //const enteredId = enteredTime + enteredTitle;
+
+    // const newBug = {
+    //   //id: enteredId,
+    //   title: enteredTitle,
+    //   details: enteredDetails,
+    //   steps: enteredSteps,
+    //   version: enteredVersion,
+    //   priority: enteredPriority,
+    //   assigned: enteredAssigned,
+    //   creator: enteredCreator,
+    //   //time: enteredTime,
+    // };
+
+    //dispatch(addNewBugs(newBug));
+    //storeDataToServer(newBug);
 
     //add data to Firebase (this worked)
     // const storeData = async (newBug) => {
@@ -93,15 +120,15 @@ const AddNewBug = () => {
 
     // storeData(newBug).catch((error) => console.error(error.message));
 
-    history.push('/bug-tracker/bugs-list');
+    // history.push('/bug-tracker/bugs-list');
 
-    resetTitle();
-    resetDetails();
-    resetSteps();
-    resetVersion();
-    resetPriority();
-    resetAssigned();
-    resetCreator();
+    // resetTitle();
+    // resetDetails();
+    // resetSteps();
+    // resetVersion();
+    // resetPriority();
+    // resetAssigned();
+    // resetCreator();
   };
 
   return (
